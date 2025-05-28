@@ -44,6 +44,12 @@ async def get_formas_pagamento():
     response = templates.TemplateResponse("formas_pagamento.html", {"request": {}, "formas_pagamento": formas_pagamento})
     return response
 
+@app.get("/produtos/{id}")
+async def get_produto_por_id(id: int):
+    produto = produto_repo.obter_por_id(id)
+    response = templates.TemplateResponse("produto.html", {"request": {}, "produto": produto})
+    return response
+
 
 if __name__ == "__main__":
     uvicorn.run(app="main:app", host="127.0.0.1", port=8000, reload=True)
